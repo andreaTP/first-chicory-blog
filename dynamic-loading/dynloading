@@ -1,0 +1,23 @@
+///usr/bin/env jbang "$0" "$@" ; exit $?
+
+
+//DEPS com.dylibso.chicory:runtime:0.0.2
+import java.io.File;
+import com.dylibso.chicory.runtime.Module;
+import com.dylibso.chicory.wasm.types.Value;
+import static java.lang.System.*;
+
+public class dynloading {
+
+    public static void main(String... args) {
+        if (args.length != 2) {
+            err.println("Please pass as argument a wasm file and a number");
+        }
+
+        var instance = Module.build(new File(args[0])).instantiate();
+        var exportedFunction = instance.getExport("exported_function");
+        var result = exportedFunction.apply(Value.i32(Integer.parseInt(args[1])));
+
+        out.println("Result: " + result[0].asInt());
+    }
+}

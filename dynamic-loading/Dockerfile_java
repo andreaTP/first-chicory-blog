@@ -1,0 +1,9 @@
+FROM quay.io/quarkus/ubi-quarkus-graalvmce-builder-image:jdk-21
+
+WORKDIR /usr/src/myapp
+COPY . .
+
+RUN curl -Ls https://sh.jbang.dev | bash -s - app setup
+RUN $HOME/.jbang/bin/jbang export native --force dynloading
+
+ENTRYPOINT [ "./dynloading" ]
