@@ -1,7 +1,9 @@
 #! /bin/bash
 set -euxo pipefail
 
-quarkus:dev &
+cd code-with-quarkus
+
+docker build -f src/main/docker/Dockerfile.native-scratch -t chicory/getting-started .
 
 # and test the endpoints:
 
