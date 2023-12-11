@@ -1,5 +1,6 @@
 package org.acme;
 
+import com.dylibso.chicory.runtime.Module;
 import java.io.InputStream;
 import jakarta.enterprise.context.ApplicationScoped;
 
@@ -12,7 +13,7 @@ public class WasmService {
         this.module = Module.build(module);
     }
 
-    public String compute(String content) {
-        return "TODO";
+    public int compute(int content) {
+        return 42;
     }
 }
